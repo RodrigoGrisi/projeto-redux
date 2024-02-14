@@ -1,20 +1,20 @@
 import styles from './header.module.css'
 import { Link, useNavigate } from 'react-router-dom'
 
-export function Header(){
+export function Header() {
   const navigate = useNavigate();
   const user = null;
 
-  function handleLogin(){
+  function handleLogin() {
     navigate("/")
   }
 
-  function handleLogout(){
+  function handleLogout() {
     dispatch(logoutUser())
     navigate("/")
   }
 
-  return(
+  return (
     <header>
       <div className={styles.content}>
         <Link to="/painel">
@@ -22,11 +22,13 @@ export function Header(){
         </Link>
 
         {user ? (
-          <button className={styles.logout} onClick={handleLogout}>
+          <button className={styles.logout}
+            onClick={handleLogout}>
             Sair
           </button>
         ) : (
-          <button className={styles.login} onClick={handleLogin}>
+          <button className={styles.login}
+            onClick={handleLogin}>
             Fazer login
           </button>
         )}
