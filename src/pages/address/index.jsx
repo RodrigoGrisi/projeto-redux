@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import styles from './address.module.css';
 import { Header } from '../../components/header';
 import { Link } from 'react-router-dom';
@@ -19,14 +19,18 @@ export function Address() {
 
   function handleRegisterAddress() {
 
+    if (addressName === "" || addressName === "") {
+      alert("preencha todos os campos")
+      return;
+    }
+
     dispatch(addAddress({
       location: addressName,
       number: addressNumber,
     }))
 
-    alert("Endereço atualizado com sucesso.");
-
-    // navigate('/painel')
+    navigate('/painel')
+    return;
 
   }
 
@@ -73,7 +77,7 @@ export function Address() {
 
 
             {user && user?.address ? (
-            <button className={styles.buttonDelete } onClick={handleDeleteAddress}>Deletar Endereço</button>
+              <button className={styles.buttonDelete} onClick={handleDeleteAddress}>Deletar Endereço</button>
 
             ) : (<></>)
 

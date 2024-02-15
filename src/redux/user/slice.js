@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { useNavigate } from 'react-router-dom';
 
 const initialState = {
   user: null,
@@ -37,9 +36,8 @@ export const userSlice = createSlice({
       }
 
       if (state.user === null) {
-        alert("Faça o login para cadastrar um endereço")
-
-        return { ...state }
+        alert("Faça o login para cadastrar um endereço.")
+        return { ...state };
       }
 
 
@@ -74,21 +72,40 @@ export const userSlice = createSlice({
 
       state.users = action.payload
       state.loading = false
-      
-      // console.log(action.payload)
+
+      console.log(action.payload)
     },
     fetchUsersFailure: (state, action) => {
       console.log("Caiu na Failure")
       console.log(action.payload)
       state.loading = false
+    },
+    fetchUserById: (state) => {
+      console.log("Chamou no slice")
+    },
+    fetchUserByIdSucess: (state, action) => {
+      console.log(`User do ID : ${action.payload.id}`)
+      console.log(action.payload)
+    },
+    fetchUserByIdFailure: (state) => {
+      console.log("Falha no FetchUserById")
     }
   }
 })
 
 export const {
-  createUser, logoutUser,
-  addAddress, deleteAddress, fetchUsers,
-  fetchUsersSucess, fetchUsersFailure,
+
+  createUser,
+  logoutUser,
+  addAddress,
+  deleteAddress,
+  fetchUsers,
+  fetchUsersSucess,
+  fetchUsersFailure,
+  fetchUserById,
+  fetchUserByIdSucess,
+  fetchUserByIdFailure,
+
 } = userSlice.actions;
 
 export default userSlice.reducer;
