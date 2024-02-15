@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 
 const initialState = {
   user: null,
+  users: [],
+  loading: false
 }
 
 export const userSlice = createSlice({
@@ -40,7 +42,7 @@ export const userSlice = createSlice({
         return { ...state }
       }
 
-      
+
 
       return {
         ...state,
@@ -53,20 +55,40 @@ export const userSlice = createSlice({
         }
       }
 
-
     },
     deleteAddress: (state) => {
       return {
         ...state,
-        user:{
+        user: {
           ...state.user,
           address: null,
         }
       }
+    },
+    fetchUsers: (state) => {
+
+      state.loading = true
+
+    },
+    fetchUsersSucess: (state, action) => {
+
+      state.users = action.payload
+      state.loading = false
+      
+      // console.log(action.payload)
+    },
+    fetchUsersFailure: (state, action) => {
+      console.log("Caiu na Failure")
+      console.log(action.payload)
+      state.loading = false
     }
   }
 })
 
-export const { createUser, logoutUser, addAddress, deleteAddress } = userSlice.actions;
+export const {
+  createUser, logoutUser,
+  addAddress, deleteAddress, fetchUsers,
+  fetchUsersSucess, fetchUsersFailure,
+} = userSlice.actions;
 
 export default userSlice.reducer;
